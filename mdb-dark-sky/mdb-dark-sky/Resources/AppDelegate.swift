@@ -8,9 +8,13 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+//    // configuring with AppDelegate to make changes for CoreLocation
+//    static let center = UNUserNotificationCenter.current()
+//    static let locationManager = CLLocationManager()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

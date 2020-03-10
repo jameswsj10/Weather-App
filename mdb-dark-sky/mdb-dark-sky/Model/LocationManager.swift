@@ -1,5 +1,5 @@
 //
-//  WeatherManager.swift
+//  LocationManager.swift
 //  mdb-dark-sky
 //
 //  Created by James Jung on 3/9/20.
