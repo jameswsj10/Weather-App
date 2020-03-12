@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import AVFoundation
 
 class WeatherDisplayVC: UIViewController {
     let locationManager = CLLocationManager()
@@ -87,5 +88,13 @@ class WeatherDisplayVC: UIViewController {
         self.PrecipType.text = "\(currWeather.precipType ?? "None")"
         self.WindSpeed.text = "\(currWeather.windSpeed) mph"
         self.FeelsLike.text = "\(Int(currWeather.apparentTemperature!))º"
+    }
+    @IBAction func playAudioForecast(_ sender: Any) {
+        var forecastString: String?
+        forecastString = "Currently in \(self.CurrLocation.text!) \(self.CurrDay.text!) it is \(currWeather.temperature!) degrees and \(currWeather.summary). The high for today is \(currWeather.temperatureHigh ?? 65) degrees with \(currWeather.temperatureLow ?? 45) being the lowest for today. There is a \(currWeather.precipProbability * 10) percent chance of \(currWeather.precipType ?? "rain") with an apparent temperature of \(currWeather.apparentTemperature!) degrees. Current Wind speed is \(currWeather.windSpeed) miles per hour so expect a small breeze on your way out today. Have a great day!"
+        let synthesizer = AVSpeechSynthesizer()
+        let utterance = AVSpeechUtterance(string: forecastString!)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        synthesizer.speak(utterance)
     }
 }

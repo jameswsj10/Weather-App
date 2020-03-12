@@ -45,7 +45,7 @@ extension WeatherDisplayVC: CLLocationManagerDelegate {
             self.latitude = userLocation.coordinate.latitude
         }
         
-        print("current coordinates are: \(longitude), \(latitude)")
+//        print("current coordinates are: \(longitude), \(latitude)
         
         // deal with diff date if we search
         if let date = DateString {
