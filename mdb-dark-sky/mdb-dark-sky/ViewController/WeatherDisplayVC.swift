@@ -17,6 +17,8 @@ class WeatherDisplayVC: UIViewController {
     var longitude: CLLocationDegrees!
     var urlkey = "https://api.darksky.net/forecast/64976a352d42a63e1843c54a2626a59a/"
     var defaultUrl: String!
+    var DateString: String?
+    var isSearching = false
     
     @IBOutlet weak var CurrLocation: UILabel!
     @IBOutlet weak var CurrTemp: UILabel!
@@ -36,6 +38,12 @@ class WeatherDisplayVC: UIViewController {
         super.viewDidLoad()
         determineCurrentLocation()
         //updateBackgroundGIF()
+        thisWeekTable.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func comingFromSearchUnWindSegue(segue: UIStoryboardSegue) {
+        print("COORDS FROM SEARCH: \(latitude), \(longitude)")
+        determineCurrentLocation()
         thisWeekTable.backgroundColor = UIColor.clear
     }
     
@@ -75,9 +83,9 @@ class WeatherDisplayVC: UIViewController {
         self.CurrHiTemp.text = "\(Int(currWeather.temperatureHigh ?? 65))"
         self.CurrLoTemp.text = "\(Int(currWeather.temperatureLow ?? 45))"
         self.CurrSummary.text = "Today: \(currWeather.summary)"
-        self.PoP.text = "\(currWeather.precipProbability)"
+        self.PoP.text = "\(Int(currWeather.precipProbability * 10))%"
         self.PrecipType.text = "\(currWeather.precipType ?? "None")"
-        self.WindSpeed.text = "\(currWeather.windSpeed)"
-        self.FeelsLike.text = "\(Int(currWeather.apparentTemperature!))"
+        self.WindSpeed.text = "\(currWeather.windSpeed) mph"
+        self.FeelsLike.text = "\(Int(currWeather.apparentTemperature!))º"
     }
 }

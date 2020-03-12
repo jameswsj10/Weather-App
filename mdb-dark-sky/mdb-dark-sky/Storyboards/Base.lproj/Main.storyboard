@@ -10,6 +10,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="xdr-ix-prh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aiG-Sl-Zee" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="RSV-Sw-x8B" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0lR-x8-FiR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -21,7 +22,6 @@
                         <segue destination="ZgJ-3f-95I" kind="relationship" relationship="viewControllers" id="n0m-an-lSq"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aiG-Sl-Zee" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-845" y="117"/>
         </scene>
@@ -65,13 +65,27 @@
                                 <rect key="frame" x="0.0" y="362" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRS-43-KO3">
+                                <rect key="frame" x="183" y="598" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchButton:" destination="ZgJ-3f-95I" eventType="touchUpInside" id="ZyL-Ry-W2l"/>
+                                    <segue destination="m16-nI-K87" kind="unwind" identifier="loadUpSearchedWeather" unwindAction="comingFromSearchUnWindSegueWithSegue:" id="TkY-wB-DEz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Jc-XY-Ucz"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="1XH-0E-Dmb"/>
+                    <connections>
+                        <outlet property="datePicker" destination="SGB-JQ-Gl1" id="taB-xU-eyA"/>
+                        <outlet property="locationTxtField" destination="uu0-c2-gAv" id="XqM-fX-nMX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXs-cT-pAr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="m16-nI-K87" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="152.17391304347828" y="480.80357142857139"/>
         </scene>
@@ -240,9 +254,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="65º" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcY-5v-G2l">
-                                <rect key="frame" x="148" y="112" width="118" height="77"/>
+                                <rect key="frame" x="140" y="112" width="135" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="81"/>
                                 <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -250,7 +264,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather" id="gpf-b0-w2z"/>
+                    <tabBarItem key="tabBarItem" title="Weather" selectedImage="sun.max.fill" catalog="system" id="gpf-b0-w2z">
+                        <color key="badgeColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="wbO-2K-iaV"/>
                     <connections>
                         <outlet property="CurrDay" destination="W2Q-8y-x4d" id="cxU-Bz-SlX"/>
@@ -273,5 +289,6 @@
     </scenes>
     <resources>
         <image name="sky-blue-cloud-clear" width="910" height="1365"/>
+        <image name="sun.max.fill" catalog="system" width="64" height="62"/>
     </resources>
 </document>

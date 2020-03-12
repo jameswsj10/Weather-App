@@ -13,7 +13,7 @@ import CoreLocation
 
 extension WeatherDisplayVC: CLLocationManagerDelegate {
     
-    func getAPI(_ WeatherUrl: String, _ ForecastUrl: String) {
+    func getAPI(_ WeatherUrl: String) {
         print("updating current weather")
 
         APIManager.fetchWeather(WeatherUrl, { data in
@@ -24,12 +24,11 @@ extension WeatherDisplayVC: CLLocationManagerDelegate {
             }
         })
         
-        APIManager.fetchForecast(ForecastUrl, { data in
+        APIManager.fetchForecast(WeatherUrl, { data in
             self.currWeekWeathers = data
-            self.thisWeekTable.reloadData()
-//            DispatchQueue.main.async {
-//                self.thisWeekTable.reloadData()
-//            }
+            DispatchQueue.main.async {
+                self.thisWeekTable.reloadData()
+            }
         })
         
     }
@@ -39,12 +38,24 @@ extension WeatherDisplayVC: CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0] as CLLocation
         print("THIS IS THE DATE: \(userLocation.timestamp)")
         manager.stopUpdatingLocation()
-        defaultUrl = "\(urlkey)\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)"
-        self.longitude = userLocation.coordinate.longitude
-        self.latitude = userLocation.coordinate.latitude
         
-//        print(longitude, latitude)
-        getAPI(defaultUrl, defaultUrl)
+        if !isSearching {
+            print("\(longitude) longitude updated")
+            self.longitude = userLocation.coordinate.longitude
+            self.latitude = userLocation.coordinate.latitude
+        }
+        
+        print("current coordinates are: \(longitude), \(latitude)")
+        
+        // deal with diff date if we search
+        if let date = DateString {
+            defaultUrl = "\(urlkey)\(self.latitude ?? userLocation.coordinate.latitude),\(self.longitude ??  userLocation.coordinate.longitude),\(date)"
+            print("coorddinates of date searched")
+        } else {
+            defaultUrl = "\(urlkey)\(self.latitude ?? userLocation.coordinate.latitude),\(self.longitude ?? userLocation.coordinate.longitude)"
+            print("regular coordinates")
+        }
+        getAPI(defaultUrl)
     }
     
     func determineCurrentLocation() {
